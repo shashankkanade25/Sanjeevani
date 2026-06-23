@@ -352,19 +352,31 @@ Application Recovery
 
 ### Kubernetes Workloads
 
-(Add screenshot)
+<img width="2312" height="238" alt="image" src="https://github.com/user-attachments/assets/527c4105-f704-4e27-9f18-8a83aef3fe81" />
+
+### Node Endpoint Failure
+<img width="1090" height="132" alt="image" src="https://github.com/user-attachments/assets/65db72a0-edbf-4e4f-aeac-39b497e1ffcd" />
 
 ### AI Incident Report
 
-(Add screenshot)
+<img width="2864" height="1682" alt="image" src="https://github.com/user-attachments/assets/81158b7e-b4d1-4f5f-bcca-a111eaa1023a" />
+
+<img width="2868" height="916" alt="image" src="https://github.com/user-attachments/assets/bb45bfcb-ae27-49af-b506-279acc222719" />
+
+
 
 ### Self-Healing Execution
 
-(Add screenshot)
+<img width="1836" height="966" alt="image" src="https://github.com/user-attachments/assets/8f62ea64-6031-4478-9a41-dc34778f3fc6" />
+
 
 ### Incident Storage
 
-(Add screenshot)
+<img width="2824" height="210" alt="image" src="https://github.com/user-attachments/assets/c890dc09-a9be-4aee-bb0e-b08a31b2aaec" />
+
+<img width="2872" height="1428" alt="image" src="https://github.com/user-attachments/assets/8281eb9a-3a90-476e-bc19-8c0f04a846a6" />
+
+
 
 ---
 
