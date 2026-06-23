@@ -26,47 +26,10 @@ This platform automates the entire workflow.
 
 ---
 
-## Solution Architecture
+## Project Architecture
 
-```text
-                   ┌────────────────────┐
-                   │  Kubernetes App    │
-                   └─────────┬──────────┘
-                             │
-                             ▼
-                    Failure / Crash
-                             │
-                             ▼
-                   ┌────────────────────┐
-                   │ Kubernetes Cluster │
-                   │      (Kind)        │
-                   └─────────┬──────────┘
-                             │
-                             ▼
-                   ┌────────────────────┐
-                   │    AI Analyzer     │
-                   └─────────┬──────────┘
-                             │
-                    Collect Logs
-                             │
-                             ▼
-                   ┌────────────────────┐
-                   │     Gemini AI      │
-                   └─────────┬──────────┘
-                             │
-                   Root Cause Analysis
-                             │
-                             ▼
-                   ┌────────────────────┐
-                   │ Incident Reports   │
-                   │ Persistent Storage │
-                   └─────────┬──────────┘
-                             │
-                             ▼
-                   ┌────────────────────┐
-                   │ Self-Healing Engine│
-                   └────────────────────┘
-```
+<img width="1536" height="1024" alt="image" src="https://github.com/user-attachments/assets/eb377089-ee71-4135-8a8e-2e9c993c31ab" />
+
 
 ---
 
