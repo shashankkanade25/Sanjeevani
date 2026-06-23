@@ -1,2 +1,10 @@
+venv/
 .env
-.env
+__pycache__/
+*.pyc
+
+reports/*.txt
+
+.vscode/
+.idea/
+
