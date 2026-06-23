@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-analyzer
+
+  namespace: self-healing
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: ai-analyzer
+
+  template:
+    metadata:
+      labels:
+        app: ai-analyzer
+
+    spec:
+      serviceAccountName: ai-analyzer
+      
+      volumes:
+      - name: incident-storage
+        persistentVolumeClaim:
+          claimName: incident-pvc
+      
+      containers:
+
+      - name: ai-analyzer
+
+        image: ai-analyzer:v3
+        
+        volumeMounts:
+        - name: incident-storage
+          mountPath: /reports
+
+        imagePullPolicy: Never
+
+        env:
+
+        - name: GEMINI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: gemini-secret
+              key: GEMINI_API_KEY

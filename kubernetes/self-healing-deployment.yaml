@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+
+metadata:
+  name: self-healing-app
+  namespace: self-healing
+
+spec:
+  replicas: 2
+
+  selector:
+    matchLabels:
+      app: self-healing-app
+
+  template:
+    metadata:
+      labels:
+        app: self-healing-app
+
+    spec:
+      containers:
+      - name: self-healing-app
+
+        image: self-healing-app:v3
+        imagePullPolicy: Never
+
+        ports:
+        - containerPort: 5000
+
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          failureThreshold: 3
+
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 5000
+
+          initialDelaySeconds: 5
+          periodSeconds: 3
+          failureThreshold: 2

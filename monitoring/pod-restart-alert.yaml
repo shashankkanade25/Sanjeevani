@@ -1,0 +1,31 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+
+metadata:
+  name: self-healing-alerts
+  namespace: monitoring
+  labels:
+    release: monitoring
+spec:
+  groups:
+  - name: self-healing.rules
+
+    rules:
+
+    - alert: PodRestartDetected
+
+      expr: |
+        increase(
+          kube_pod_container_status_restarts_total{
+            namespace="self-healing"
+          }[1h]
+        ) > 0
+
+      for: 10s
+
+      labels:
+        severity: warning
+
+      annotations:
+        summary: "Pod restart detected"
+        description: "A pod in self-healing namespace restarted."

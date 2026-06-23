@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: remediation-webhook
+  namespace: self-healing
+  labels:
+    release: monitoring
+
+spec:
+  route:
+    receiver: remediation-webhook
+    matchers:
+    - name: alertname
+      value: PodRestartDetected
+
+  receivers:
+  - name: remediation-webhook
+    webhookConfigs:
+    - url: "http://remediation-service.self-healing.svc.cluster.local:5001/webhook"

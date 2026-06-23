@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: remediation-service
+  namespace: self-healing
+
+spec:
+  replicas: 1
+
+  selector:
+    matchLabels:
+      app: remediation-service
+
+  template:
+    metadata:
+      labels:
+        app: remediation-service
+
+    spec:
+      containers:
+      - name: remediation-service
+
+        image: remediation-service:v1
+
+        imagePullPolicy: Never
+
+        ports:
+        - containerPort: 5001
