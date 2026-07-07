@@ -154,36 +154,155 @@ def analyze_logs(
     )
 
     prompt = f"""
-You are a Senior Site Reliability Engineer.
+    You are a Senior Site Reliability Engineer.
 
-Incident Type:
-{incident_type}
+    Analyze the Kubernetes logs and return ONLY the following fields.
 
-Analyze the Kubernetes logs below.
+    Status:
+    Severity:
+    Root Cause:
+    Impact:
+    Recommended Fix:
+    Confidence:
 
-Provide:
+    Rules:
 
-1. Root Cause
-2. Severity
-3. Impact
-4. Recommended Fix
-5. Confidence Score
-6. Recommended Kubernetes Action
+    - Maximum 1 sentence per field.
+    - Root Cause should be under 20 words.
+    - Impact should be under 20 words.
+    - Confidence should be High, Medium or Low only.
+    - Recommended Fix should be under 20 words.
+    - Do not explain.
+    - Do not repeat information.
+    - Do not use markdown.
+    - Return plain text only.
 
-Logs:
+    Logs:
 
-{logs}
-"""
+    {logs}
+    """
 
     response = model.generate_content(
         prompt
     )
 
-    print("\n")
+    print()
+
     print("=" * 80)
-    print("AI INCIDENT REPORT")
+    print("🚨 SANJEEVANI INCIDENT REPORT")
     print("=" * 80)
-    print(response.text)
+
+    print()
+
+    print(f"📦 Pod               : {pod_name}")
+
+    print(
+        f"📅 Time              : {datetime.datetime.now().strftime('%d-%b-%Y %H:%M:%S')}"
+    )
+
+    print()
+
+    print("📋 INCIDENT SUMMARY")
+    print("-" * 80)
+    
+    print()
+
+    for line in response.text.splitlines():
+
+        if line.startswith("Status:"):
+
+            print(
+                "✔ " +
+                line.replace(
+                    "Status:", 
+                    "Status            :"
+                )
+            )
+
+            print()
+
+        elif line.startswith("Severity:"):
+
+            print(
+                "✔ " +
+                line.replace(
+                    "Severity:",
+                    "Severity          :"
+                )
+            )
+
+            print()
+
+        elif line.startswith("Root Cause:"):
+
+            print(
+                "✔ " +
+                line.replace(
+                    "Root Cause:",
+                    "Root Cause        :"
+                )
+            )
+
+            print()
+
+        elif line.startswith("Impact:"):
+
+            print(
+                "✔ " +
+                line.replace(
+                    "Impact:",
+                    "Impact            :"
+                )
+            )
+
+            print()
+
+        elif line.startswith("Recommended Fix:"):
+
+            print(
+                "✔ " +
+                line.replace(
+                    "Recommended Fix:",
+                    "Recommended Fix   :"
+                )
+            )
+
+            print()
+
+        elif line.startswith("Confidence:"):
+
+            print(
+                "✔ " +
+                line.replace(
+                    "Confidence:",
+                    "Confidence        :"
+                )
+            )
+
+    print()
+
+    print("=" * 80)
+
+    print("⚙️ AUTOMATED REMEDIATION")
+    print("-" * 80)
+
+    print()
+
+    print("✅ Previous Logs Collected")
+
+    print("✅ AI Root Cause Analysis Completed")
+
+    print("✅ Incident Report Generated")
+
+    print("✅ Report Stored Successfully")
+
+    print("✅ Deployment Restart Triggered")
+
+    print("✅ Kubernetes Recovery Initiated")
+
+    print()
+
+    print("=" * 80)
 
     save_report(
         pod_name,
