@@ -1,4 +1,5 @@
 from kubernetes import client, config
+from kubernetes import watch
 
 # =====================================
 # Kubernetes Client
@@ -54,4 +55,42 @@ def restart_deployment(
                 }
             }
         },
+    )
+
+def get_pod_events(
+    pod_name,
+    namespace="self-healing",
+):
+    """
+    Return Kubernetes events for a pod.
+    """
+
+    field_selector = (
+        f"involvedObject.name={pod_name}"
+    )
+
+    return v1.list_namespaced_event(
+        namespace=namespace,
+        field_selector=field_selector,
+    
+    )
+
+
+def watch_pods(
+    namespace="self-healing",
+):
+    """
+    Watch Kubernetes pod events.
+    """
+
+    watcher = watch.Watch()
+
+    return watcher.stream(
+
+        v1.list_namespaced_pod,
+
+        namespace=namespace,
+
+        timeout_seconds=0,
+
     )

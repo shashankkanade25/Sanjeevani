@@ -1,5 +1,5 @@
 import time
-
+from remediation.action_selector import select_action
 from engine.detection_engine import detect_incidents
 
 from remediation.remediator import restart_application
@@ -91,9 +91,16 @@ while True:
                     flush=True,
                 )
 
-                if incident["type"] == "Pod Restart":
+                action = select_action(
+                    incident
+                )
 
-                    try:
+                try:
+
+                    if action in [
+                        "restart",
+                        "analyze",
+                    ]:
 
                         logs = get_previous_logs(
                             pod_name=pod_name,
@@ -105,14 +112,23 @@ while True:
                             logs,
                         )
 
+                    if action == "restart":
+
                         restart_application()
 
-                    except Exception as e:
+                    elif action == "monitor":
 
                         print(
-                            f"\nAnalysis Failed: {e}",
+                            "Monitoring incident...",
                             flush=True,
                         )
+
+                except Exception as e:
+
+                    print(
+                        f"\nAnalysis Failed: {e}",
+                        flush=True,
+                    )
 
         time.sleep(30)
 
@@ -122,5 +138,6 @@ while True:
             f"Loop Error: {e}",
             flush=True,
         )
+
 
         time.sleep(30)
