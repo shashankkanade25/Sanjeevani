@@ -1,6 +1,8 @@
 from detectors.restart_detector import restart_detected
 from detectors.pod_detector import pod_status_detected
 from detectors.container_detector import container_state_detected
+from detectors.event_detector import event_detected
+from k8s.client import get_pod_events
 
 def detect_incidents(
     pod,
@@ -24,6 +26,22 @@ def detect_incidents(
     )
 
     pod_name = pod.metadata.name
+    
+    # =====================================
+    # Kubernetes Events
+    # =====================================
+
+    events = get_pod_events(
+        pod_name
+    )
+
+    incidents.extend(
+
+        event_detected(
+            events
+        )
+
+    )   
 
     restart_count = status.restart_count
 
