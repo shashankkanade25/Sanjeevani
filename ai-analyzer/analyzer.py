@@ -116,12 +116,17 @@ while True:
 
                         restart_application()
 
+                    elif action == "increase_memory":
+
+                        increase_memory()
+
+                    elif action == "notify":
+
+                        notify_image_issue()
+
                     elif action == "monitor":
 
-                        print(
-                            "Monitoring incident...",
-                            flush=True,
-                        )
+                        monitor_incident()
 
                 except Exception as e:
 

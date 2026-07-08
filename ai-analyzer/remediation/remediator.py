@@ -27,3 +27,42 @@ def restart_application():
             f"Restart Failed: {e}",
             flush=True,
         )
+
+
+def increase_memory():
+
+    print(
+        "\nSMART REMEDIATION",
+        flush=True,
+    )
+
+    print(
+        "Increase Memory (Future Version)",
+        flush=True,
+    )
+
+
+def notify_image_issue():
+
+    print(
+        "\nSMART REMEDIATION",
+        flush=True,
+    )
+
+    print(
+        "Notify Image Issue (Future Version)",
+        flush=True,
+    )
+
+
+def monitor_incident():
+
+    print(
+        "\nSMART REMEDIATION",
+        flush=True,
+    )
+
+    print(
+        "Monitoring Incident",
+        flush=True,
+    )

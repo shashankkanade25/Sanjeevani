@@ -1,20 +1,40 @@
 def select_action(incident):
 
-    actions = {
+    incident_type = incident["type"]
+    reason = incident["reason"]
 
-        "Pod Restart": "restart",
+    # Restart Count
+    if incident_type == "Pod Restart":
 
-        "Container Waiting": "restart",
+        return "restart"
 
-        "Container Terminated": "analyze",
+    # CrashLoopBackOff
+    if (
+        incident_type == "Container Waiting"
+        and reason == "CrashLoopBackOff"
+    ):
 
-        "Kubernetes Event": "analyze",
+        return "restart"
 
-        "Pod Status": "monitor",
+    # OOMKilled
+    if (
+        incident_type == "Container Terminated"
+        and reason == "OOMKilled"
+    ):
 
-    }
+        return "increase_memory"
 
-    return actions.get(
-        incident["type"],
-        "none",
-    )
+    # Image Pull Failure
+    if (
+        incident_type == "Kubernetes Event"
+        and reason == "ImagePullBackOff"
+    ):
+
+        return "notify"
+
+    # Pending Pod
+    if incident_type == "Pod Status":
+
+        return "monitor"
+
+    return "none"
