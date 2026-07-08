@@ -2,6 +2,15 @@ import time
 from remediation.action_selector import select_action
 from engine.detection_engine import detect_incidents
 
+from remediation.recovery_verifier import verify_recovery
+
+from remediation.remediator import (
+    restart_application,
+    increase_memory,
+    notify_image_issue,
+    monitor_incident,
+)
+
 from remediation.remediator import restart_application
 
 from reports.report_generator import (
@@ -115,6 +124,7 @@ while True:
                     if action == "restart":
 
                         restart_application()
+                        verify_recovery()
 
                     elif action == "increase_memory":
 
